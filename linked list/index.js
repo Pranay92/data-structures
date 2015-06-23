@@ -36,7 +36,9 @@ function list() {
     return node;
   }
 
-  this.remove = function() {
-
+  this.remove = function(data,node) {
+    var node = node || this.node;
+    if(data === node.data) {
+    }
   };
 }

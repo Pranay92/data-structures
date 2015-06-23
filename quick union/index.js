@@ -1,36 +1,46 @@
 
 
-function QuickFind(N) {
-	this.arr = [];
-	for(var i = 0; i < N; ++i) {
-		this.arr[i] = i;
+function QuickUnion(len) {
+	
+	this.id = [];
+
+	for(var i = 0; i < len; i++) {
+		this.id[i] = i;
 	}
+
 }
 
-QuickFind.prototype.connected = function(a,b) {
-	return this.arr[a] == this.arr[b];
-}
 
-QuickFind.prototype.union = function(a,b) {
-	var len = this.arr.length;
-	var aid = this.arr[a];
-	var bid = this.arr[b];
-
-	while(len--) {
-		if(this.arr[len] == aid) {
-			this.arr[len] = bid;
-		}
+QuickUnion.prototype.root = function(i) {
+	while(i !== this.id[i]) {
+		i = this.id[i]
 	}
-}
+
+	return i;
+};
+
+QuickUnion.prototype.connected = function(p,q) {
+	return (this.root(p) == this.root(q));
+};
 
 
-var path = new QuickFind(10);
+QuickUnion.prototype.union = function(p,q) {
+	var i = this.root(p);
+	var j = this.root(q);
+	this.id[i] = j
+};
 
-path.union(1,4);
-path.union(5,6);
-path.union(8,9);
-path.union(4,9);
+var qu = new QuickUnion(10);
 
-console.log(path.connected(1,9));
-console.log(path.connected(8,4));
-console.log(path.connected(1,5));
+qu.union(2,3);
+qu.union(4,5);
+qu.union(2,7);
+qu.union(4,3);
+
+console.log(qu.root(2));
+console.log(qu.root(1));
+console.log(qu.root(3));
+
+console.log(qu.connected(2,4));
+console.log(qu.connected(3,7));
+console.log(qu.connected(1,9));
