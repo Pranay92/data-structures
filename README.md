@@ -11,3 +11,5 @@ List of data structures that needs implementation:
 3. Tree
 4. Stack
 5. Queue
+6. Quick Find
+7. Quick Union
